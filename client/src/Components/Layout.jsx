@@ -33,16 +33,6 @@ const nav = [
     icon: "⌂",
   },
 
-  {
-    to: "/setup",
-    label: "HRMS Setup",
-    permission:
-      "company.settings",
-    altPermission:
-      "employees.manage",
-    icon: "✓",
-  },
-
   /*
   |--------------------------------------------------------------------------
   | Organization
@@ -147,48 +137,6 @@ const nav = [
 
   /*
   |--------------------------------------------------------------------------
-  | Reports
-  |--------------------------------------------------------------------------
-  */
-
-  {
-    to: "/reports",
-    label: "Reports",
-    permission:
-      "employees.view",
-    altPermission:
-      "attendance.view",
-    thirdPermission:
-      "leave.team",
-    fourthPermission:
-      "employees.manage",
-    fifthPermission:
-      "attendance.manage",
-    sixthPermission:
-      "leave.approve",
-    icon: "▤",
-  },
-
-  /*
-  |--------------------------------------------------------------------------
-  | Payroll
-  |--------------------------------------------------------------------------
-  */
-
-  {
-    to: "/payroll",
-    label: "Payroll",
-    permission:
-      "payroll.self",
-    altPermission:
-      "payroll.view",
-    thirdPermission:
-      "payroll.manage",
-    icon: "₨",
-  },
-
-  /*
-  |--------------------------------------------------------------------------
   | Administration
   |--------------------------------------------------------------------------
   */
@@ -199,14 +147,6 @@ const nav = [
     permission:
       "access.control",
     icon: "⌾",
-  },
-
-  {
-    to: "/audit",
-    label: "Audit Log",
-    permission:
-      "audit.view",
-    icon: "≡",
   },
 
   {

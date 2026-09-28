@@ -8,7 +8,6 @@ import Login from "./pages/Login";
 import RegisterCompany from "./pages/RegisterCompany";
 
 import Dashboard from "./pages/Dashboard";
-import SetupWizard from "./pages/SetupWizard";
 
 import Departments from "./pages/Departments";
 import WorkforceSetup from "./pages/WorkforceSetup";
@@ -19,13 +18,9 @@ import Attendance from "./pages/Attendance";
 import Leaves from "./pages/Leaves";
 import Holidays from "./pages/Holidays";
 
-import Reports from "./pages/Reports";
 import Notifications from "./pages/Notifications";
 
-import Payroll from "./pages/Payroll";
-
 import AccessControl from "./pages/AccessControl";
-import AuditLog from "./pages/AuditLog";
 import Settings from "./pages/Settings";
 import Profile from "./pages/Profile";
 
@@ -54,7 +49,7 @@ export default function App() {
       />
 
       {/* ============================================================= */}
-      {/* Protected Application */}
+      {/* Protected HRMS */}
       {/* ============================================================= */}
 
       <Route
@@ -73,23 +68,9 @@ export default function App() {
           }
         />
 
-        {/* Setup */}
-
-        <Route
-          path="/setup"
-          element={
-            <ProtectedRoute
-              permission={[
-                "company.settings",
-                "employees.manage",
-              ]}
-            >
-              <SetupWizard />
-            </ProtectedRoute>
-          }
-        />
-
+        {/* =========================================================== */}
         {/* Organization */}
+        {/* =========================================================== */}
 
         <Route
           path="/departments"
@@ -134,7 +115,9 @@ export default function App() {
           }
         />
 
+        {/* =========================================================== */}
         {/* Daily Operations */}
+        {/* =========================================================== */}
 
         <Route
           path="/shifts"
@@ -172,7 +155,9 @@ export default function App() {
           }
         />
 
+        {/* =========================================================== */}
         {/* Notifications */}
+        {/* =========================================================== */}
 
         <Route
           path="/notifications"
@@ -181,45 +166,9 @@ export default function App() {
           }
         />
 
-        {/* Reports */}
-
-        <Route
-          path="/reports"
-          element={
-            <ProtectedRoute
-              permission={[
-                "employees.view",
-                "employees.manage",
-                "attendance.view",
-                "attendance.manage",
-                "leave.team",
-                "leave.approve",
-                "leave.policies",
-              ]}
-            >
-              <Reports />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* Payroll */}
-
-        <Route
-          path="/payroll"
-          element={
-            <ProtectedRoute
-              permission={[
-                "payroll.self",
-                "payroll.view",
-                "payroll.manage",
-              ]}
-            >
-              <Payroll />
-            </ProtectedRoute>
-          }
-        />
-
+        {/* =========================================================== */}
         {/* Administration */}
+        {/* =========================================================== */}
 
         <Route
           path="/access"
@@ -228,17 +177,6 @@ export default function App() {
               permission="access.control"
             >
               <AccessControl />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/audit"
-          element={
-            <ProtectedRoute
-              permission="audit.view"
-            >
-              <AuditLog />
             </ProtectedRoute>
           }
         />

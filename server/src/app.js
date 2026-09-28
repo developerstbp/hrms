@@ -1,5 +1,10 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+
+import {
+  fileURLToPath,
+} from "url";
 
 import authRoutes from "./routes/authRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
@@ -25,6 +30,22 @@ import notificationRoutes from "./routes/notificationRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 
 const app = express();
+
+const __filename =
+  fileURLToPath(
+    import.meta.url
+  );
+
+const __dirname =
+  path.dirname(
+    __filename
+  );
+
+const clientDistPath =
+  path.resolve(
+    __dirname,
+    "../../client/dist"
+  );
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +94,7 @@ app.use(
 */
 
 app.get(
-  "/",
+  "/api/health",
   (
     req,
     res
@@ -166,6 +187,53 @@ app.use(
 app.use(
   "/api/company",
   companyRoutes
+);
+
+/*
+|--------------------------------------------------------------------------
+| React Production Frontend
+|--------------------------------------------------------------------------
+*/
+
+app.use(
+  express.static(
+    clientDistPath
+  )
+);
+
+/*
+|--------------------------------------------------------------------------
+| React Router Fallback
+|--------------------------------------------------------------------------
+|
+| Any GET request that is not /api/*
+| should return React's index.html.
+|
+*/
+
+app.use(
+  (
+    req,
+    res,
+    next
+  ) => {
+    if (
+      req.method ===
+        "GET" &&
+      !req.path.startsWith(
+        "/api/"
+      )
+    ) {
+      return res.sendFile(
+        path.join(
+          clientDistPath,
+          "index.html"
+        )
+      );
+    }
+
+    next();
+  }
 );
 
 /*
