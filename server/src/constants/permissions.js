@@ -1,0 +1,71 @@
+export const PERMISSIONS = Object.freeze({
+  DASHBOARD_VIEW: "dashboard.view",
+  EMPLOYEES_VIEW: "employees.view",
+  EMPLOYEES_MANAGE: "employees.manage",
+  DEPARTMENTS_VIEW: "departments.view",
+  DEPARTMENTS_MANAGE: "departments.manage",
+  ATTENDANCE_SELF: "attendance.self",
+  ATTENDANCE_VIEW: "attendance.view",
+  ATTENDANCE_MANAGE: "attendance.manage",
+  LEAVE_SELF: "leave.self",
+  LEAVE_TEAM: "leave.team",
+  LEAVE_APPROVE: "leave.approve",
+  LEAVE_POLICIES: "leave.policies",
+  SHIFT_SELF: "shift.self",
+  SHIFT_TEAM: "shift.team",
+  SHIFT_MANAGE: "shift.manage",
+  PAYROLL_SELF: "payroll.self",
+  PAYROLL_VIEW: "payroll.view",
+  PAYROLL_MANAGE: "payroll.manage",
+  HOLIDAYS_VIEW: "holidays.view",
+  HOLIDAYS_MANAGE: "holidays.manage",
+  AUDIT_VIEW: "audit.view",
+  COMPANY_SETTINGS: "company.settings",
+  ACCESS_CONTROL: "access.control"
+});
+
+export const ALL_PERMISSIONS = Object.values(PERMISSIONS);
+const operational = ALL_PERMISSIONS.filter((permission) => permission !== PERMISSIONS.ACCESS_CONTROL);
+
+export const ROLE_DEFAULT_PERMISSIONS = Object.freeze({
+  admin: ALL_PERMISSIONS,
+  hr: operational,
+  hod: [
+    PERMISSIONS.DASHBOARD_VIEW,
+    PERMISSIONS.EMPLOYEES_VIEW,
+    PERMISSIONS.DEPARTMENTS_VIEW,
+    PERMISSIONS.ATTENDANCE_SELF,
+    PERMISSIONS.ATTENDANCE_VIEW,
+    PERMISSIONS.LEAVE_SELF,
+    PERMISSIONS.LEAVE_TEAM,
+    PERMISSIONS.LEAVE_APPROVE,
+    PERMISSIONS.SHIFT_SELF,
+    PERMISSIONS.SHIFT_TEAM,
+    PERMISSIONS.PAYROLL_SELF,
+    PERMISSIONS.HOLIDAYS_VIEW
+  ],
+  manager: [
+    PERMISSIONS.DASHBOARD_VIEW,
+    PERMISSIONS.EMPLOYEES_VIEW,
+    PERMISSIONS.DEPARTMENTS_VIEW,
+    PERMISSIONS.ATTENDANCE_SELF,
+    PERMISSIONS.ATTENDANCE_VIEW,
+    PERMISSIONS.LEAVE_SELF,
+    PERMISSIONS.LEAVE_TEAM,
+    PERMISSIONS.LEAVE_APPROVE,
+    PERMISSIONS.SHIFT_SELF,
+    PERMISSIONS.SHIFT_TEAM,
+    PERMISSIONS.PAYROLL_SELF,
+    PERMISSIONS.HOLIDAYS_VIEW
+  ],
+  employee: [
+    PERMISSIONS.DASHBOARD_VIEW,
+    PERMISSIONS.ATTENDANCE_SELF,
+    PERMISSIONS.LEAVE_SELF,
+    PERMISSIONS.SHIFT_SELF,
+    PERMISSIONS.PAYROLL_SELF,
+    PERMISSIONS.HOLIDAYS_VIEW
+  ]
+});
+
+export const getDefaultPermissions = (role = "employee") => [...(ROLE_DEFAULT_PERMISSIONS[role] || ROLE_DEFAULT_PERMISSIONS.employee)];
